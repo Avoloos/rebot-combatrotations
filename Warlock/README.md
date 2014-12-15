@@ -25,7 +25,6 @@ If the condition matches it will summon the shown pet and ignore all other possi
 | Player is not in Group               | Voidwalker/Voidlord |
 | Player has Grimorie of Supremacy     | Felhunter/Observer  |
 |                                      | Imp/Fel Imp         |
-|--------------------------------------|---------------------|
 
 
 - **Pet: HealthFunnel Pet HP in %** - (_Demonology and Affliction only_)
@@ -42,13 +41,12 @@ This setting defines if the named DPS cooldowns will be used by the bot automati
 |-----------------------------------------------------------------|---------------------|
 | There are at least 4 Mobs also additionaly the Target is a Boss | Abyssal             |
 | or the Target has more Health than the Player and is Elite      | Infernal            |
-|-----------------------------------------------------------------|---------------------|
+|                                                                 |                     |
 | Target is a Boss                                                | Terrorguard         |
 | or the Target has more Health than the Player and is Elite      | Doomguard           |
-|-----------------------------------------------------------------|---------------------|
+|                                                                 |                     |
 | Target is a Boss                                                |                     |
 | or the Target has more Health than the Player and is Elite      | Grimorie of Service |
-|-----------------------------------------------------------------|---------------------|
 
 
 - **DPS: Grimorie of Service Pet**

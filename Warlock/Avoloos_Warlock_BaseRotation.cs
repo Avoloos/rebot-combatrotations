@@ -14,9 +14,9 @@ namespace Avoloos
     /// </summary>
     public static class RotationVersion
     {
-        public const string WarlockIcyVeinsAffliction = "1.0.0";
-        public const string WarlockIcyVeinsDestruction = "1.0.0";
-        public const string WarlockIcyVeinsDemonology = "1.0.0";
+        public const string WarlockIcyVeinsAffliction = "1.1.0";
+        public const string WarlockIcyVeinsDestruction = "1.1.0";
+        public const string WarlockIcyVeinsDemonology = "1.1.1";
     }
 
     /// <summary>

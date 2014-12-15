@@ -5,41 +5,18 @@ using ReBot.API;
 using System;
 using System.Collections.Generic;
 using Geometry;
+using System.Reflection;
 
 namespace Avoloos
 {
-    public enum WarlockPet
+    /// <summary>
+    /// Rotation version.
+    /// </summary>
+    public static class RotationVersion
     {
-        AutoSelect = 0,
-        SoulImp,
-        Voidwalker,
-        Succubus,
-        Felhunter,
-        Felguard,
-        Infernal,
-        Doomguard,
-    }
-
-
-    //Display IDs
-    public enum WlPetDisplayId
-    {
-        SoulImp = 4449,
-        Voidwalker = 1132,
-        Felhunter = 850,
-        Succubus = 4162,
-        Felguard = 61493,
-        Infernal = 169,
-        // Infernal
-        Doomguard = 1912,
-        //Doomguard
-        ImpSoulImp = 44152,
-        ImpVoidwalker = 44542,
-        ImpFelhunter = 44153,
-        ImpSuccubus = 44610,
-        ImpFelguard = 44609,
-        ImpInfernal = 51650,
-        ImpDoomguard = 22809,
+        public const string WarlockIcyVeinsAffliction = "1.0.0";
+        public const string WarlockIcyVeinsDestruction = "1.0.0";
+        public const string WarlockIcyVeinsDemonology = "1.0.0";
     }
 
     /// <summary>
@@ -100,12 +77,61 @@ namespace Avoloos
     namespace Warlock
     {
         /// <summary>
+        /// Warlock pets.
+        /// </summary>
+        public enum WarlockPet
+        {
+            AutoSelect = 0,
+            SoulImp,
+            Voidwalker,
+            Succubus,
+            Felhunter,
+            Felguard,
+            Infernal,
+            Doomguard,
+        }
+
+        /// <summary>
+        /// Pet display identifier.
+        /// </summary>
+        public enum WlPetDisplayId
+        {
+            SoulImp = 4449,
+            Voidwalker = 1132,
+            Felhunter = 850,
+            Succubus = 4162,
+            Felguard = 61493,
+            Infernal = 169,
+            // Infernal
+            Doomguard = 1912,
+            //Doomguard
+            ImpSoulImp = 44152,
+            ImpVoidwalker = 44542,
+            ImpFelhunter = 44153,
+            ImpSuccubus = 44610,
+            ImpFelguard = 44609,
+            ImpInfernal = 51650,
+            ImpDoomguard = 22809,
+        }
+
+        /// <summary>
         /// Warlock spell Ids
         /// </summary>
         public enum WarlockSpellIds
         {
             CATACLYSM = 152108
         }
+
+        /// <summary>
+        /// Demonology spell Ids.
+        /// </summary>
+        public enum DemonologySpellIds
+        {
+            SHADOWBOLT = 686,
+            TOUCHOFCAOS = 103964,
+            CORRUPTION = 172,
+            DOOM = 603,
+        };
 
         /// <summary>
         /// Warlock grimorie pets.
@@ -122,9 +148,11 @@ namespace Avoloos
         }
 
         /// <summary>
-        /// Basic class which implements some convinience functions.
+        /// Basic class which implements some convinience functions especially for Warlocks.
+        /// It also has a great deal of the configuration options and all Rotations which can be done by almost all Specs.
+        /// It will also Handle the Pets.
         /// </summary>
-        abstract public class WarlockBaseRotation : CombatRotation
+        abstract public class BaseRotation : CombatRotation
         {
             /// <summary>
             /// The selected pet.
@@ -255,10 +283,9 @@ namespace Avoloos
             /// <summary>
             /// Initializes a new instance of the <see cref="Avoloos.Warlock.WarlockBaseRotation"/> class.
             /// </summary>
-            protected WarlockBaseRotation()
+            protected BaseRotation()
             {
                 FearTrackingList = new List<ExpirableObject>();
-                Info("Warlock Combat Rotation - Version 1.3 by Avoloos.");
             }
 
             /// <summary>

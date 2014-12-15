@@ -79,39 +79,41 @@ This setting defines when the bot will cease to use Life Tap. If the Players Hea
 
 - **Boss Setting: Percentual factor of a Targets MaxHP in relation to Players MaxHP to be valued as Bossencounter**
 This setting (_BossHealthPercentage_) defines a factor the Players MaxHealth will get multiplicated with. If this multiplicated value is lower then the health of the Target it will be count as "Boss" in any condition which checks for a "Boss" Target.
-**The used formula is:** _Me.MaxHealth * ( BossHealthPercentage / 100f )_
+**The used condition is:** _Target.MaxHealth >= Me.MaxHealth * ( BossHealthPercentage / 100f )_
 
+- **Boss Setting: +Level a Target has to have to be valued as Boss encounter**
+This setting (_BossLevelIncrease_) defines the Levels which will get added to the Level of the Player. If the Player then is a lower Level than the Target it will be counted as "Boss" in any condition which checks for a "Boss" Target.
+**The used condition is:** _Target.Level >= Me.Level + BossLevelIncrease_
 
+- **Boss Setting: Use Dark Soul on Boss only**
+If this is checked it will use DarkSoul _only_ if the target gets valued as "Boss"
 
-
-<!--o.Level >= Me.Level + BossLevelIncrease-->
+- **Boss Setting: Use Terrorguard/Infernal/Grimorie of Service on Boss only**
+If this is checked it will use the named DPS cooldowns _only_ if the target gets valued as "Boss"
 
 ### Affliction only
+
+- None
+
 ### Demonology only
+
+- **DPS: Use Hellfire (disable for leveling!)**
+If this setting is checked it will use Hellfire if there are at least 4 Enemies in front of the character.
+**Note:** *It will only use it if the Mobs are in reach of the Player!*
+
+- **DPS: Minimal Health to do Hellfire in %**
+This setting defines the minimum health a player should have to _activate_ Hellfire for one full channeling.
+**Beware:** *It will not abort the spell if Players health drops below this setting!*
+
 ### Destruction only
 
+- **DPS: Use Havoc on Mobs with HP in %**
+This will define how much health the Target should at least have so havoc will be used on it.
+It will use Havoc on the healthiest Target available within the set HP range defined by the percentual setting.
+**Note:** *If you set this too low it may cause wasted Havoc charges!*
 
-
-
-
-
-- DPS: Use Terrorguard/Infernal automatically
-This will disable the automatically usage of the Terrorguard/Infernal.
-
-Doomguard/Terrorguard:
-If the Target is an Elite Mob and it has more MaxHealth than the Player
-it will Summon the demon, but only if the Targets current Health
-is below 25% or the Players Health is below 50%
-
-Infernal/Abyssal:
-If the Target is an Elite Mob and it has more MaxHealth than the Player and if there are at least 3 adds
-it will Summon the demon, but only if the Targets current Health
-is below 25% or the Players Health is below 50%
-
-- DPS: Use Dark Soul automatically
-If the Target is an Elite Mob and it has more MaxHealth than the Player it will cast Dark Soul.
-
-
+- **DPS: Use Havoc on your Focus (if friendly on its Target)**
+If this setting is checked it will use Havoc _always_ on your set "/focus" Target. If this Target is a friendly Player/NPC it will use its Target instead.
 
 ## Basic Rotation
 

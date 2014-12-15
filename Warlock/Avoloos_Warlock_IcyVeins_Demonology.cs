@@ -134,13 +134,18 @@ namespace Avoloos
                         }
                     }
 
-                    if (Cast(
-                            "Soul Fire",
-                            () => doSoulFire
-                            && ( Target.HealthFraction <= 0.25 )
-                            || ( Me.HasAura("Molten Core", true, MinMoltenStacksForSoulfire) )
-                        ))
-                        return true;
+                    if (UseSoulfireWhileMorphed) {
+                        if (Cast(
+                                "Soul Fire",
+                                () => doSoulFire
+                                && ( Target.HealthFraction <= 0.25 )
+                                || ( Me.HasAura("Molten Core", true, MinMoltenStacksForSoulfire) )
+                            ))
+                            return true;
+                    } else {
+                        if (Cast("Demonbolt", () => !HasAura("Demonbolt", true, 4)))
+                            return true;
+                    }
 
                     // TODO: find a way to get close to the enemies (leap there?)
                     if (doHellfire || doImmolationAura) {

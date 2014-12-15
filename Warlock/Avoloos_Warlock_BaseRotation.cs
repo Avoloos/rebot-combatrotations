@@ -155,10 +155,10 @@ namespace Avoloos
         abstract public class BaseRotation : CombatRotation
         {
             /// <summary>
-            /// The selected pet.
+            /// Should the OOC-Rotation be disabled for the Fishingbot?
             /// </summary>
-            [JsonProperty("Pet: Selected Pet"), JsonConverter(typeof(StringEnumConverter))]
-            public WarlockPet SelectedPet = WarlockPet.AutoSelect;
+            [JsonProperty("General: Disable OutOfCombat for FishBot")]
+            public bool DisableOutOfCombatFishbot = true;
 
             /// <summary>
             /// Should use pet?
@@ -167,10 +167,16 @@ namespace Avoloos
             public bool UsePet = true;
 
             /// <summary>
+            /// The selected pet.
+            /// </summary>
+            [JsonProperty("Pet: Selected Pet"), JsonConverter(typeof(StringEnumConverter))]
+            public WarlockPet SelectedPet = WarlockPet.AutoSelect;
+
+            /// <summary>
             /// When should the warlock use HealtFunnel to heal the pet
             /// </summary>
             [JsonProperty("Pet: HealthFunnel Pet HP in %")]
-            public int FunnelPetHp = 40;
+            public int FunnelPetHp = 55;
 
             /// <summary>
             /// How much life does the player need to have to use Healtfunnel
@@ -185,28 +191,16 @@ namespace Avoloos
             public bool UseAdditionalDPSPet = true;
 
             /// <summary>
-            /// Should the bot use Terrorguard/Infernal on bosses only
+            /// The selected pet.
             /// </summary>
-            [JsonProperty("DPS: Use Terrorguard/Infernal/Grimorie of Service on Boss only")]
-            public bool UseAdditionalDPSPetBossOnly = true;
+            [JsonProperty("DPS: Grimorie of Service Pet"), JsonConverter(typeof(StringEnumConverter))]
+            public WarlockGrimoriePet SelectedGrimoriePet = WarlockGrimoriePet.CurrentMainPet;
 
             /// <summary>
             /// Should the bot use dark Soul
             /// </summary>
             [JsonProperty("DPS: Use Dark Soul automatically")]
             public bool UseDarkSoul = true;
-
-            /// <summary>
-            /// Should the bot use dark Soul
-            /// </summary>
-            [JsonProperty("DPS: Use Dark Soul on Boss only")]
-            public bool UseDarkSoulBossOnly = false;
-
-            /// <summary>
-            /// Should Shadofury be used to intterupt?
-            /// </summary>
-            [JsonProperty("CC: Use Shadowfury as Interrupt")]
-            public bool UseShadowfuryAsInterrupt = true;
 
             /// <summary>
             /// Should the Bot fear?
@@ -221,47 +215,53 @@ namespace Avoloos
             public int FearBanTime = 10000;
 
             /// <summary>
+            /// Should Shadofury be used to intterupt?
+            /// </summary>
+            [JsonProperty("Survival: Use Shadowfury as Interrupt")]
+            public bool UseShadowfuryAsInterrupt = true;
+
+            /// <summary>
             /// Should soulstone be used for the player if he is not in a group?
             /// </summary>
             [JsonProperty("Survival: Soulstone yourself if not in group")]
             public bool UseSelfSoulstone = true;
 
             /// <summary>
-            /// Should the OOC-Rotation be disabled for the Fishingbot?
-            /// </summary>
-            [JsonProperty("General: Disable OutOfCombat for FishBot")]
-            public bool DisableOutOfCombatFishbot = true;
-
-            /// <summary>
             /// Should the bot use Life Tap if the Health is high and the mana is low?
             /// </summary>
-            [JsonProperty("General: Automatic mana-management through Life Tap")]
+            [JsonProperty("Automatic mana-management: Use Life Tap")]
             public bool AutomaticManaManagement = true;
 
             /// <summary>
             /// Life Tap Player HP condition in %
             /// </summary>
-            [JsonProperty("General: Life of Player in % until Life Tap gets used")]
+            [JsonProperty("Automatic mana-management: Life of Player in % until Life Tap gets used")]
             public int AutomaticManamanagementPercentage = 65;
 
             /// <summary>
             /// Defines the factor of HP a unit has to have to be counted as a boss.
             /// </summary>
-            [JsonProperty("General/DPS: Percentual factor of a Targets MaxHP in relation to Players MaxHP to be valued as Bossencounter")]
+            [JsonProperty("Boss Setting: Percentual factor of a Targets MaxHP in relation to Players MaxHP to be valued as Bossencounter")]
             public int BossHealthPercentage = 500;
 
             /// <summary>
             /// Defines the +Level a Unit should have to be counted as a boss.
             /// </summary>
-            [JsonProperty("General/DPS: +Level a Target has to have to be valued as Boss encounter")]
+            [JsonProperty("Boss Setting: +Level a Target has to have to be valued as Boss encounter")]
             public int BossLevelIncrease = 5;
 
             /// <summary>
-            /// The selected pet.
+            /// Should the bot use dark Soul
             /// </summary>
-            [JsonProperty("DPS: Grimorie of Service Pet"), JsonConverter(typeof(StringEnumConverter))]
-            public WarlockGrimoriePet SelectedGrimoriePet = WarlockGrimoriePet.CurrentMainPet;
+            [JsonProperty("Boss Setting: Use Dark Soul on Boss only")]
+            public bool UseDarkSoulBossOnly = false;
 
+            /// <summary>
+            /// Should the bot use Terrorguard/Infernal on bosses only
+            /// </summary>
+            [JsonProperty("Boss Setting: Use Terrorguard/Infernal/Grimorie of Service on Boss only")]
+            public bool UseAdditionalDPSPetBossOnly = true;
+             
             /// <summary>
             /// The fear tracking list.
             /// </summary>

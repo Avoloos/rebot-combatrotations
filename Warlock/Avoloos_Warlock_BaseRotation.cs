@@ -277,7 +277,9 @@ namespace Avoloos
                 { "Shadowfury", 8 * 8 },
                 { "Immolate", 10 * 10 }, // Fire and Brimstone Version
                 { "Conflagrate", 10 * 10 }, // Fire and Brimstone Version
-                { "Cataclysm", 8 * 8 }
+                { "Cataclysm", 8 * 8 },
+                { "Hellfire", 8 * 8 }, // No source on this just a guess
+                { "Immolation Aura", 8 * 8 } // No source on this just a guess
             };
 
             /// <summary>

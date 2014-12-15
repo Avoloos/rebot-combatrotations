@@ -765,7 +765,7 @@ namespace Avoloos
             /// <param name="o">The Unit we want to check</param>
             public bool IsBoss(UnitObject o)
             {
-                return ( o.IsElite() && o.MaxHealth >= Me.MaxHealth * ( BossHealthPercentage / 100f ) ) || o.Level >= Me.Level + BossLevelIncrease;
+                return ( o.MaxHealth >= Me.MaxHealth * ( BossHealthPercentage / 100f ) ) || o.Level >= Me.Level + BossLevelIncrease;
             }
 
             /// <summary>

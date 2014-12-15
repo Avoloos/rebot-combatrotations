@@ -291,6 +291,16 @@ namespace Avoloos
             }
 
             /// <summary>
+            /// Counts the enemies in players range.
+            /// </summary>
+            /// <returns>The enemies in players range.</returns>
+            /// <param name="rangeSq">Squared Range.</param>
+            public int CountEnemiesInPlayersRangeSquared(float rangeSq)
+            {
+                return Adds.Concat(new[] { Target }).Count(u => u.DistanceSquared <= rangeSq);
+            }
+
+            /// <summary>
             /// Summon the warlock pet, if we have no alive pet or if current pet is not the pet we want
             /// </summary>
             public bool SummonPet(WarlockPet pet)

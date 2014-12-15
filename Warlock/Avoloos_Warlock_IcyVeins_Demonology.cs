@@ -34,7 +34,7 @@ namespace Avoloos
                 /// Should the bot use Terrorguard/Infernal
                 /// </summary>
                 [JsonProperty("DPS: Minimal Health to do Hellfire in %")]
-                public int HellfireHealthPercentage = 35;
+                public int HellfireHealthPercentage = 50;
 
                 //[JsonProperty("DPS: Move near target for Hellfire (not used atm.)")]
                 //public bool DoMoveHellfireImmolation = true;
@@ -103,10 +103,10 @@ namespace Avoloos
                         doSoulFire = false;
                     } else if (mobsInFrontOfMe >= 4) {
                         // TODO: Support Mannoroth's Fury
-                        doHellfire = !HasMetamorphosis && UseHellfire;
+                        doHellfire = !HasMetamorphosis && UseHellfire && CountEnemiesInPlayersRangeSquared(SpellAoERange("Hellfire")) >= 4;
                         MinMoltenStacksForSoulfire = 10;
                     } else if (mobsInFrontOfMe >= 3) {
-                        doImmolationAura = HasMetamorphosis;
+                        doImmolationAura = HasMetamorphosis && CountEnemiesInPlayersRangeSquared(SpellAoERange("Immolation Aura")) >= 3;
                         doCataclysm = HasSpell("Cataclysm") && HasMetamorphosis && Target.IsElite();
                     } else {
                         dotAllTargets = true;

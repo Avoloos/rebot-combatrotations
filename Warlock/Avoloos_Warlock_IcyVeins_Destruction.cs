@@ -32,7 +32,7 @@ namespace Avoloos
                 /// <summary>
                 /// Should havoc only be cast on focus / focus target if focus is friendly
                 /// </summary>
-                [JsonProperty("DPS: Use Havoc on your Focus (if friendly on its Target")]
+                [JsonProperty("DPS: Use Havoc on your Focus (if friendly on its Target)")]
                 public bool UseHavocOnFocus = true;
 
                 /// <summary>

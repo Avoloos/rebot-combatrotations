@@ -134,9 +134,9 @@ namespace Avoloos
         };
 
         /// <summary>
-        /// Warlock grimorie pets.
+        /// Warlock grimoire pets.
         /// </summary>
-        public enum WarlockGrimoriePet
+        public enum WarlockGrimoirePet
         {
             CurrentMainPet,
             SoulImp,
@@ -187,14 +187,14 @@ namespace Avoloos
             /// <summary>
             /// Should the bot use Terrorguard/Infernal
             /// </summary>
-            [JsonProperty("DPS: Use Terrorguard/Infernal/Grimorie of Service automatically")]
+            [JsonProperty("DPS: Use Terrorguard/Infernal/Grimoire of Service automatically")]
             public bool UseAdditionalDPSPet = true;
 
             /// <summary>
             /// The selected pet.
             /// </summary>
-            [JsonProperty("DPS: Grimorie of Service Pet"), JsonConverter(typeof(StringEnumConverter))]
-            public WarlockGrimoriePet SelectedGrimoriePet = WarlockGrimoriePet.CurrentMainPet;
+            [JsonProperty("DPS: Grimoire of Service Pet"), JsonConverter(typeof(StringEnumConverter))]
+            public WarlockGrimoirePet SelectedGrimoirePet = WarlockGrimoirePet.CurrentMainPet;
 
             /// <summary>
             /// Should the bot use dark Soul
@@ -259,7 +259,7 @@ namespace Avoloos
             /// <summary>
             /// Should the bot use Terrorguard/Infernal on bosses only
             /// </summary>
-            [JsonProperty("Boss Setting: Use Terrorguard/Infernal/Grimorie of Service on Boss only")]
+            [JsonProperty("Boss Setting: Use Terrorguard/Infernal/Grimoire of Service on Boss only")]
             public bool UseAdditionalDPSPetBossOnly = true;
              
             /// <summary>
@@ -862,60 +862,60 @@ namespace Avoloos
                         return true;
                 }
 
-                if (HasSpell("Grimorie: Imp")) {
-                    bool GrimorieCondition = ( UseAdditionalDPSPet && Target.MaxHealth >= Me.MaxHealth && Target.IsElite() && !UseAdditionalDPSPetBossOnly ) || IsBoss(Target);
-                    if (GrimorieCondition) {
-                        var GrimoriePet = SelectedGrimoriePet;
+                if (HasSpell("Grimoire: Imp")) {
+                    bool GrimoireCondition = ( UseAdditionalDPSPet && Target.MaxHealth >= Me.MaxHealth && Target.IsElite() && !UseAdditionalDPSPetBossOnly ) || IsBoss(Target);
+                    if (GrimoireCondition) {
+                        var GrimoirePet = SelectedGrimoirePet;
 
-                        if (GrimoriePet == WarlockGrimoriePet.CurrentMainPet) {
+                        if (GrimoirePet == WarlockGrimoirePet.CurrentMainPet) {
                             switch (SelectedPet) {
                                 case WarlockPet.AutoSelect:
-                                    GrimoriePet = Target.IsCastingAndInterruptible() ? WarlockGrimoriePet.Felhunter : WarlockGrimoriePet.Doomguard;
+                                    GrimoirePet = Target.IsCastingAndInterruptible() ? WarlockGrimoirePet.Felhunter : WarlockGrimoirePet.Doomguard;
                                     break;
                                 case WarlockPet.SoulImp:
-                                    GrimoriePet = WarlockGrimoriePet.SoulImp;
+                                    GrimoirePet = WarlockGrimoirePet.SoulImp;
                                     break;
                                 case WarlockPet.Voidwalker:
-                                    GrimoriePet = WarlockGrimoriePet.Voidwalker;
+                                    GrimoirePet = WarlockGrimoirePet.Voidwalker;
                                     break;
                                 case WarlockPet.Succubus:
-                                    GrimoriePet = WarlockGrimoriePet.Succubus;
+                                    GrimoirePet = WarlockGrimoirePet.Succubus;
                                     break;
                                 case WarlockPet.Felhunter:
-                                    GrimoriePet = WarlockGrimoriePet.Felhunter;
+                                    GrimoirePet = WarlockGrimoirePet.Felhunter;
                                     break;
                                 case WarlockPet.Doomguard:
-                                    GrimoriePet = WarlockGrimoriePet.Doomguard;
+                                    GrimoirePet = WarlockGrimoirePet.Doomguard;
                                     break;
                                 case WarlockPet.Infernal:
-                                    GrimoriePet = WarlockGrimoriePet.Infernal;
+                                    GrimoirePet = WarlockGrimoirePet.Infernal;
                                     break;
                             }
                         }
 
-                        switch (GrimoriePet) {
-                            case WarlockGrimoriePet.SoulImp:
-                                if (Cast("Grimorie: Imp"))
+                        switch (GrimoirePet) {
+                            case WarlockGrimoirePet.SoulImp:
+                                if (Cast("Grimoire: Imp"))
                                     return true;
                                 break;
-                            case WarlockGrimoriePet.Voidwalker:
-                                if (Cast("Grimorie: Voidwalker"))
+                            case WarlockGrimoirePet.Voidwalker:
+                                if (Cast("Grimoire: Voidwalker"))
                                     return true;
                                 break;
-                            case WarlockGrimoriePet.Succubus:
-                                if (Cast("Grimorie: Succubus"))
+                            case WarlockGrimoirePet.Succubus:
+                                if (Cast("Grimoire: Succubus"))
                                     return true;
                                 break;
-                            case WarlockGrimoriePet.Felhunter:
-                                if (Cast("Grimorie: Felhunter"))
+                            case WarlockGrimoirePet.Felhunter:
+                                if (Cast("Grimoire: Felhunter"))
                                     return true;
                                 break;
-                            case WarlockGrimoriePet.Doomguard:
-                                if (Cast("Grimorie: Doomguard"))
+                            case WarlockGrimoirePet.Doomguard:
+                                if (Cast("Grimoire: Doomguard"))
                                     return true;
                                 break;
-                            case WarlockGrimoriePet.Infernal:
-                                if (Cast("Grimorie: Infernal"))
+                            case WarlockGrimoirePet.Infernal:
+                                if (Cast("Grimoire: Infernal"))
                                     return true;
                                 break;
                         }

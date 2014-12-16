@@ -11,7 +11,7 @@ If this setting is enabled all OutOfCombat Rotations are disabled for the FishBo
 
 - **Pet: Use Pet**
 If this is option is not set, then the bot won't summon a pet as companion and also dismiss manual summoned ones.
-**Note:** If Grimorie of Sacrifice is used it _will_ summon a pet to sacrifice it.
+**Note:** If Grimoire of Sacrifice is used it _will_ summon a pet to sacrifice it.
 
 - **Pet: Selected Pet**
 This option defines the Pet which will get summoned. The following table illustrates the priority list which will get checked from top to bottom for the Auto-Select mode.
@@ -23,7 +23,7 @@ If the condition matches it will summon the shown pet and ignore all other possi
 | Player can summon Felguard           | Felguard/Wrathguard |
 | Player uses PvPBot                   | Felhunter/Observer  |
 | Player is not in Group               | Voidwalker/Voidlord |
-| Player has Grimorie of Supremacy     | Felhunter/Observer  |
+| Player has Grimoire of Supremacy     | Felhunter/Observer  |
 |                                      | Imp/Fel Imp         |
 
 
@@ -34,7 +34,7 @@ It will _not_ do any other Combat Rotation as long as your Pet is below this val
 - **Pet: HealthFunnel Player HP in %** - (_Demonology and Affliction only_)
 This defines the Health of the Player in % until the bot tries to heal the pet. If the Players HP sink below this level it wil cease using Health Funnel until it regained enough Health.
 
-- **DPS: Use Terrorguard/Infernal/Grimorie of Service automatically**
+- **DPS: Use Terrorguard/Infernal/Grimoire of Service automatically**
 This setting defines if the named DPS cooldowns will be used by the bot automatically. Lets see the condition Table it will use to decide what should be cast. It will cast the spell of first matching condition.
 
 | Condition                                                       | Pet / Ability       |
@@ -46,11 +46,11 @@ This setting defines if the named DPS cooldowns will be used by the bot automati
 | or the Target has more Health than the Player and is Elite      | Doomguard           |
 |                                                                 |                     |
 | Target is a Boss                                                |                     |
-| or the Target has more Health than the Player and is Elite      | Grimorie of Service |
+| or the Target has more Health than the Player and is Elite      | Grimoire of Service |
 
 
-- **DPS: Grimorie of Service Pet**
-This lets you define the Pet which will get used when using the Grimorie of Service.
+- **DPS: Grimoire of Service Pet**
+This lets you define the Pet which will get used when using the Grimoire of Service.
 
 - **DPS: Use Dark Soul automatically**
 If this setting is checked it will use DarkSoul automatically on CD if the Target is a Boss or the Target has more Health than the Player and is Elite.
@@ -86,7 +86,7 @@ This setting (_BossLevelIncrease_) defines the Levels which will get added to th
 - **Boss Setting: Use Dark Soul on Boss only**
 If this is checked it will use DarkSoul _only_ if the target gets valued as "Boss"
 
-- **Boss Setting: Use Terrorguard/Infernal/Grimorie of Service on Boss only**
+- **Boss Setting: Use Terrorguard/Infernal/Grimoire of Service on Boss only**
 If this is checked it will use the named DPS cooldowns _only_ if the target gets valued as "Boss"
 
 ### Affliction only

@@ -95,7 +95,7 @@ namespace Avoloos
                 }
 
                 /// <inheritdoc/>
-                public override void Combat()
+                override public void Combat()
                 {
                     if (Me.IsCasting && Me.CastingSpellID == (int) WarlockSpellIds.CATACLYSM)
                         return;

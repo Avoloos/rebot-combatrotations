@@ -854,16 +854,16 @@ namespace Avoloos
                     if (CastOnTerrain(
                             HasSpell("Grimoire of Supremacy") ? "Summon Abyssal" : "Summon Infernal",
                             Target.Position,
-                            () => ( ( UseAdditionalDPSPet && Target.MaxHealth >= Me.MaxHealth && Target.IsElite() && !UseAdditionalDPSPetBossOnly ) || IsBoss(Target) ) && ( Adds.Count >= 3 )
+                            () => UseAdditionalDPSPet && ( ( ( Target.MaxHealth >= Me.MaxHealth && Target.IsElite() && !UseAdditionalDPSPetBossOnly ) || IsBoss(Target) ) && ( Adds.Count >= 3 ) )
                         ) || Cast(
                             HasSpell("Grimoire of Supremacy") ? "Summon Terrorguard" : "Summon Doomguard",
-                            () => ( UseAdditionalDPSPet && Target.MaxHealth >= Me.MaxHealth && Target.IsElite() && !UseAdditionalDPSPetBossOnly ) || IsBoss(Target)
+                            () => UseAdditionalDPSPet && ( ( Target.MaxHealth >= Me.MaxHealth && Target.IsElite() && !UseAdditionalDPSPetBossOnly ) || IsBoss(Target) )
                         ))
                         return true;
                 }
 
                 if (HasSpell("Grimoire: Imp")) {
-                    bool GrimoireCondition = ( UseAdditionalDPSPet && Target.MaxHealth >= Me.MaxHealth && Target.IsElite() && !UseAdditionalDPSPetBossOnly ) || IsBoss(Target);
+                    bool GrimoireCondition = UseAdditionalDPSPet && ( ( Target.MaxHealth >= Me.MaxHealth && Target.IsElite() && !UseAdditionalDPSPetBossOnly ) || IsBoss(Target) );
                     if (GrimoireCondition) {
                         var GrimoirePet = SelectedGrimoirePet;
 

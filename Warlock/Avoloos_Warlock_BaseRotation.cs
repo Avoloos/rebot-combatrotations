@@ -14,9 +14,9 @@ namespace Avoloos
     /// </summary>
     public static class RotationVersion
     {
-        public const string WarlockIcyVeinsAffliction = "1.1.2";
-        public const string WarlockIcyVeinsDestruction = "1.1.2";
-        public const string WarlockIcyVeinsDemonology = "1.1.3";
+        public const string WarlockIcyVeinsAffliction = "1.1.3";
+        public const string WarlockIcyVeinsDestruction = "1.1.3";
+        public const string WarlockIcyVeinsDemonology = "1.1.4";
     }
 
     /// <summary>
@@ -305,7 +305,7 @@ namespace Avoloos
             /// </summary>
             public bool SummonPet(WarlockPet pet)
             {
-                bool hasBetterPets = HasSpell("Grimoire of Supremacy");
+                bool hasBetterPets = HasSpell("Summon Fel Imp");
 
                 // let rebot choose the best pet
                 if (pet == WarlockPet.AutoSelect) {

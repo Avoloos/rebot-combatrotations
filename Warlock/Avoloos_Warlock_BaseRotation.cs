@@ -5,7 +5,6 @@ using ReBot.API;
 using System;
 using System.Collections.Generic;
 using Geometry;
-using System.Reflection;
 
 namespace Avoloos
 {
@@ -14,9 +13,9 @@ namespace Avoloos
     /// </summary>
     public static class RotationVersion
     {
-        public const string WarlockIcyVeinsAffliction = "1.1.3";
-        public const string WarlockIcyVeinsDestruction = "1.1.3";
-        public const string WarlockIcyVeinsDemonology = "1.1.4";
+        public const string WarlockIcyVeinsAffliction = "1.1.4";
+        public const string WarlockIcyVeinsDestruction = "1.1.4";
+        public const string WarlockIcyVeinsDemonology = "1.1.5";
     }
 
     /// <summary>
@@ -89,6 +88,7 @@ namespace Avoloos
             Felguard,
             Infernal,
             Doomguard,
+            ManualSelect = 1000
         }
 
         /// <summary>
@@ -305,6 +305,9 @@ namespace Avoloos
             /// </summary>
             public bool SummonPet(WarlockPet pet)
             {
+                if (pet == WarlockPet.ManualSelect)
+                    return false;
+
                 bool hasBetterPets = HasSpell("Summon Fel Imp");
 
                 // let rebot choose the best pet

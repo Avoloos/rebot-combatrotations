@@ -872,6 +872,7 @@ namespace Avoloos
 
                         if (GrimoirePet == WarlockGrimoirePet.CurrentMainPet) {
                             switch (SelectedPet) {
+                                case WarlockPet.ManualSelect:
                                 case WarlockPet.AutoSelect:
                                     GrimoirePet = Target.IsCastingAndInterruptible() ? WarlockGrimoirePet.Felhunter : WarlockGrimoirePet.Doomguard;
                                     break;

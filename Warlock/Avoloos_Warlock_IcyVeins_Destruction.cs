@@ -36,6 +36,11 @@ namespace Avoloos
                 public bool UseHavocOnFocus = true;
 
                 /// <summary>
+                /// The immolate lock.
+                /// </summary>
+                readonly Countdown ImmolateLock = new Countdown(new TimeSpan(0, 0, 2), true);
+
+                /// <summary>
                 /// Gets the shadow burn damage.
                 /// </summary>
                 /// <value>The shadow burn damage.</value>
@@ -153,6 +158,8 @@ namespace Avoloos
                         return;
 
                     int burningEmbers = Me.GetPower(WoWPowerType.WarlockDestructionBurningEmbers);
+                    
+                    CastSelf("Fire and Brimstone", () => burningEmbers <= 0 && HasAura("Fire and Brimstone"));
 
                     // MultiTarget Rotation
                     if (Adds.Count > 0 && DoMultitargetRotation(Adds.Count + 1))
@@ -176,13 +183,22 @@ namespace Avoloos
                         return;
 
                     // Priority #2
-                    if (CastPreventDouble(
+                    if (( !HasSpell("Cataclysm") || SpellCooldown("Cataclysm") > 0 ) && CastPreventDouble(
                             "Immolate", 
                             () =>
-                    !Target.HasAura("Immolate", true)
-                            || ( Target.AuraTimeRemaining("Immolate") <= 3.5f && SpellCooldown("Cataclysm") > 1 )
+                                ImmolateLock.IsFinished
+                            && ( 
+                                !Target.HasAura("Immolate", true)
+                                || ( Target.AuraTimeRemaining("Immolate") <= 3.5f ) 
+                            )
                         ))
                         return;
+
+                    // Refresh with cataclysm if possible
+                    if (CastSpellOnBestAoETarget("Cataclysm")) {
+                        ImmolateLock.Restart(); // Lock Immolate
+                        return;
+                    }
 
                     // Priority #3
                     if (Cast("Conflagrate", () => SpellCharges("Conflagrate") >= 2))
@@ -210,10 +226,6 @@ namespace Avoloos
                     if (Cast("Conflagrate", () => SpellCharges("Conflagrate") >= 2))
                         return;
 
-                    // Refresh with cataclysm if possible
-                    if (CastSpellOnBestAoETarget("Cataclysm"))
-                        return;
-                
                     if (Cast("Conflagrate", () => SpellCharges("Conflagrate") == 1))
                         return;
 

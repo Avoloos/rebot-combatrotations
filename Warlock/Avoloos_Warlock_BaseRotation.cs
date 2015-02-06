@@ -33,6 +33,7 @@ namespace Avoloos
             Felguard,
             Infernal,
             Doomguard,
+            ManualSelect = 1000
         }
 
         /// <summary>
@@ -187,7 +188,7 @@ namespace Avoloos
             /// </summary>
             [JsonProperty("Boss Setting: Use Terrorguard/Infernal/Grimoire of Service on Boss only")]
             public bool UseAdditionalDPSPetBossOnly = true;
-             
+
             /// <summary>
             /// The fear tracking list.
             /// </summary>
@@ -221,7 +222,10 @@ namespace Avoloos
             /// </summary>
             public bool SummonPet(WarlockPet pet)
             {
-                bool hasBetterPets = HasSpell("Grimoire of Supremacy");
+                if (pet == WarlockPet.ManualSelect)
+                    return false;
+
+                bool hasBetterPets = HasSpell("Summon Fel Imp");
 
                 // let rebot choose the best pet
                 if (pet == WarlockPet.AutoSelect) {
@@ -238,7 +242,7 @@ namespace Avoloos
                     else if (HasSpell("Summon Imp"))
                         pet = WarlockPet.SoulImp;
                     else
-                        return false; // we can not summon a pet 
+                        return false; // we can not summon a pet
                 }
 
 
@@ -382,8 +386,8 @@ namespace Avoloos
             }
 
             /// <summary>
-            /// This will try to cast a fear spell. 
-            /// 
+            /// This will try to cast a fear spell.
+            ///
             /// It will hereby utilize a FearBanList for players, so it won't try to fear all the time.
             /// </summary>
             /// <returns><c>true</c>, if a fear spell was cast, <c>false</c> otherwise.</returns>
@@ -391,12 +395,12 @@ namespace Avoloos
             {
                 if (!FearDoFear)
                     return false;
-                
+
                 try {
                     FearTrackingList = FearTrackingList.Where(x => !x.IsExpired()).ToList(); // trim the list to all non expired feared objects.
 
                     var FearableAdds = Adds.Where(x => x.DistanceSquared < 11 * 11);
-                    if (CastSelf("Howl of Terror", () => FearableAdds.Count() >= 2)) { 
+                    if (CastSelf("Howl of Terror", () => FearableAdds.Count() >= 2)) {
                         foreach (var fearedAdd in FearableAdds.Where(x => x.IsPlayer)) {
                             FearTrackingList.Add(new ExpirableObject(fearedAdd, FearBanTime));
                         } // Do not fear them again (at least not with feat, howl of terror won't be affected by its fear descision, for the moment...)
@@ -453,8 +457,8 @@ namespace Avoloos
                     return true;
 
                 if (UseShadowfuryAsInterrupt && CastSpellOnBestAoETarget(
-                        "Shadowfury", 
-                        u => u.IsCastingAndInterruptible(), 
+                        "Shadowfury",
+                        u => u.IsCastingAndInterruptible(),
                         u => u.IsCastingAndInterruptible()
                     ))
                     return true;
@@ -641,21 +645,22 @@ namespace Avoloos
                     if (CastOnTerrain(
                             HasSpell("Grimoire of Supremacy") ? "Summon Abyssal" : "Summon Infernal",
                             Target.Position,
-                            () => ( ( UseAdditionalDPSPet && Target.MaxHealth >= Me.MaxHealth && Target.IsElite() && !UseAdditionalDPSPetBossOnly ) || IsBoss(Target) ) && ( Adds.Count >= 3 )
+                            () => UseAdditionalDPSPet && ( ( ( Target.MaxHealth >= Me.MaxHealth && Target.IsElite() && !UseAdditionalDPSPetBossOnly ) || IsBoss(Target) ) && ( Adds.Count >= 3 ) )
                         ) || Cast(
                             HasSpell("Grimoire of Supremacy") ? "Summon Terrorguard" : "Summon Doomguard",
-                            () => ( UseAdditionalDPSPet && Target.MaxHealth >= Me.MaxHealth && Target.IsElite() && !UseAdditionalDPSPetBossOnly ) || IsBoss(Target)
+                            () => UseAdditionalDPSPet && ( ( Target.MaxHealth >= Me.MaxHealth && Target.IsElite() && !UseAdditionalDPSPetBossOnly ) || IsBoss(Target) )
                         ))
                         return true;
                 }
 
                 if (HasSpell("Grimoire: Imp")) {
-                    bool GrimoireCondition = ( UseAdditionalDPSPet && Target.MaxHealth >= Me.MaxHealth && Target.IsElite() && !UseAdditionalDPSPetBossOnly ) || IsBoss(Target);
+                    bool GrimoireCondition = UseAdditionalDPSPet && ( ( Target.MaxHealth >= Me.MaxHealth && Target.IsElite() && !UseAdditionalDPSPetBossOnly ) || IsBoss(Target) );
                     if (GrimoireCondition) {
                         var GrimoirePet = SelectedGrimoirePet;
 
                         if (GrimoirePet == WarlockGrimoirePet.CurrentMainPet) {
                             switch (SelectedPet) {
+                                case WarlockPet.ManualSelect:
                                 case WarlockPet.AutoSelect:
                                     GrimoirePet = Target.IsCastingAndInterruptible() ? WarlockGrimoirePet.Felhunter : WarlockGrimoirePet.Doomguard;
                                     break;
@@ -708,7 +713,7 @@ namespace Avoloos
                         }
                     }
                 }
-                    
+
                 if (CurrentBotName == "PvP" && CastFearIfFeasible())
                     return true;
 
@@ -717,7 +722,7 @@ namespace Avoloos
 
                 if (DoHealingAndManaManagement())
                     return true;
-                    
+
                 return HasGlobalCooldown();
             }
 
@@ -728,7 +733,7 @@ namespace Avoloos
                         () => Me.HealthFraction <= 0.35 && Me.GetPower(WoWPowerType.WarlockDestructionBurningEmbers) >= 1
                     ))
                     return true;
-                    
+
                 if (Cast(
                         "Health Funnel",
                         Me.Pet,

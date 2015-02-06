@@ -158,6 +158,8 @@ namespace Avoloos
                         return;
 
                     int burningEmbers = Me.GetPower(WoWPowerType.WarlockDestructionBurningEmbers);
+                    
+                    CastSelf("Fire and Brimstone", () => burningEmbers <= 0 && HasAura("Fire and Brimstone"));
 
                     // MultiTarget Rotation
                     if (Adds.Count > 0 && DoMultitargetRotation(Adds.Count + 1))
